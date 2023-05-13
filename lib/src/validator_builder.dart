@@ -14,6 +14,7 @@ class ValidationBuilder {
     ValidatorOptions? options,
     String? localeName,
     FormValidatorLocale? locale,
+    this.fieldName,
   })  : _locale = locale ??
             (localeName == null ? globalLocale : createLocale(localeName)),
         _options = options ?? globalOptions {
@@ -27,6 +28,7 @@ class ValidationBuilder {
   static ValidatorOptions globalOptions = ValidatorOptions();
 
   static FormValidatorLocale globalLocale = createLocale('default');
+
   static void setLocale(String localeName) {
     globalLocale = createLocale(localeName);
   }
@@ -36,6 +38,7 @@ class ValidationBuilder {
   final FormValidatorLocale _locale;
   final List<StringValidationCallback> validations = [];
   final ValidatorOptions _options;
+  final String? fieldName;
 
   /// Clears validation list and adds required validation if
   /// [optional] is false
@@ -109,8 +112,8 @@ class ValidationBuilder {
   }
 
   /// Value must not be null
-  ValidationBuilder required([String? message]) =>
-      add((v) => v == null || v.isEmpty ? message ?? _locale.required() : null);
+  ValidationBuilder required([String? message]) => add((v) =>
+      v == null || v.isEmpty ? message ?? _locale.required(fieldName) : null);
 
   /// Value length must be greater than or equal to [minLength]
   ValidationBuilder minLength(int minLength, [String? message]) =>

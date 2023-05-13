@@ -21,7 +21,7 @@ class LocaleEn implements FormValidatorLocale {
   String phoneNumber(String v) => 'The field is not a valid phone number';
 
   @override
-  String required() => 'The field is required';
+  String required([String? fieldName]) => 'The field is required';
 
   @override
   String ip(String v) => 'The field is not a valid IP address';

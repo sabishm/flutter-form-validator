@@ -1,6 +1,6 @@
 abstract class FormValidatorLocale {
   String name();
-  String required();
+  String required([String? fieldName]);
   String minLength(String v, int n);
   String maxLength(String v, int n);
   String email(String v);
